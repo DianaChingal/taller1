@@ -10,9 +10,11 @@ import com.ejemplo.Products.Repository.ProductRepository;
 @Service
 public class ProductService {
 
-    private ProductRepository productRepository = new ProductRepository();
-
-
+    private ProductRepository productRepository; 
+    
+    public ProductService(ProductRepository productRepository ){
+        this.productRepository = productRepository;
+    }
 
      public Product createProduct(ProductDto producto) {
         Product product = new Product();

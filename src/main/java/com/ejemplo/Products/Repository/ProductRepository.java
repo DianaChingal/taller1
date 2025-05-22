@@ -1,10 +1,9 @@
 package com.ejemplo.Products.Repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.ejemplo.Products.Entity.Product;
 
-public class ProductRepository {
-    public Product save(Product product){
-
-        return product;
-    }
+public interface ProductRepository extends JpaRepository<Product,Long>{
+    
 }
