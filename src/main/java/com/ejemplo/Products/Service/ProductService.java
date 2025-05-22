@@ -1,5 +1,7 @@
 package com.ejemplo.Products.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,9 @@ public class ProductService {
         product.setDescripcion(producto.getDescripcion());
         product.setValor(producto.getValor());
         return productRepository.save(product);
+    }
+
+    public List<Product> listProducts(){
+        return productRepository.findAll();
     }
 }

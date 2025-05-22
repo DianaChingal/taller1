@@ -7,6 +7,8 @@ import com.ejemplo.Products.Dto.ProductDto;
 import com.ejemplo.Products.Entity.Product;
 import com.ejemplo.Products.Service.ProductService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +33,13 @@ public class ProductController {
         Product createdProduct = productService.createProduct(producto);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
-   
+    
+    @GetMapping
+    public ResponseEntity<List<Product>> listProduct() {
+        List<Product> listProduct = productService.listProducts();
+        return new ResponseEntity<>(listProduct, HttpStatus.OK);
+    }
+    
     
 
 }
