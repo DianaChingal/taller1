@@ -1,8 +1,9 @@
 package com.ejemplo.Products.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ejemplo.Products.Dto.ProductDto;
@@ -28,5 +29,41 @@ public class ProductService {
 
     public List<Product> listProducts(){
         return productRepository.findAll();
+    }
+
+    public Product updateProduct(Long id, ProductDto productDto) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            product.setNombre(productDto.getNombre());
+            product.setDescripcion(productDto.getDescripcion());
+            product.setValor(productDto.getValor());
+
+            return productRepository.save(product);
+        } else {
+            throw new RuntimeException("Producto con ID " + id + " no encontrado.");
+        }
+    }
+
+    public void deleteProduct(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new RuntimeException("Producto con ID " + id + " no encontrado.");
+        }
+        productRepository.deleteById(id);
+    }
+
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto con ID " + id + " no encontrado."));
+    }
+    
+    public List<ProductDto> getProductsByValor(double valor) {
+        List<Product> productos = productRepository.findByValorGreaterThanEqual(valor);
+
+        return productos.stream().map(product -> new ProductDto(
+                product.getNombre(),
+                product.getDescripcion(),
+                product.getValor()
+        )).collect(Collectors.toList());
     }
 }
