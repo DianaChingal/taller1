@@ -53,16 +53,18 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204: Eliminado con éxito
     }
 
+    @GetMapping("/valor")
+    public ResponseEntity<List<ProductDto>> getProductsByValor(@RequestParam double valor) {
+        List<ProductDto> productos = productService.getProductsByValor(valor);
+        return new ResponseEntity<>(productos, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         Product product = productService.getProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @GetMapping("/valor")
-    public ResponseEntity<List<ProductDto>> getProductsByValor(@RequestParam double valor) {
-        List<ProductDto> productos = productService.getProductsByValor(valor);
-        return new ResponseEntity<>(productos, HttpStatus.OK);
-    }
+    
 
 }
