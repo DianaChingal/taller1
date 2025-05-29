@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private long id;
     @Column(nullable = false, length = 64)
     private String nombre;
     @Column(length = 512)
