@@ -9,5 +9,6 @@ import com.ejemplo.Products.Entity.Product;
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
    List<Product> findByValorGreaterThanEqual(double valor);
+   
 
 }
