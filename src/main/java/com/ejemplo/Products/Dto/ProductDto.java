@@ -1,4 +1,4 @@
-    package com.ejemplo.Products.Dto;
+    package com.ejemplo.products.dto;
 
     import lombok.AllArgsConstructor;
     import lombok.Data;
@@ -14,5 +14,6 @@
         
         private String descripcion;
         private double valor;
+        private int stock;
 
     }

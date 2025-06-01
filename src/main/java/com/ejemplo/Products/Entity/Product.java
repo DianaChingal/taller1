@@ -1,4 +1,4 @@
-package com.ejemplo.Products.Entity;
+package com.ejemplo.products.entity;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
@@ -25,4 +25,6 @@ public class Product {
     private String descripcion;
     @Column(nullable = false)
     private double valor;
+    @Column(nullable = false)
+    private int stock;
 }

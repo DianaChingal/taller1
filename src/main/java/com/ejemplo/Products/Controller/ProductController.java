@@ -1,4 +1,4 @@
-package com.ejemplo.Products.Controller;
+package com.ejemplo.products.controller;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ejemplo.Products.Dto.ProductDto;
-import com.ejemplo.Products.Entity.Product;
-import com.ejemplo.Products.Service.ProductService;
+import com.ejemplo.products.dto.ProductDto;
+import com.ejemplo.products.entity.Product;
+import com.ejemplo.products.service.ProductService;
 
 
 
 @RestController
-@RequestMapping("API/v1/product")
+@RequestMapping("api/v1/product")
 public class ProductController {
 
     private ProductService productService;
@@ -65,6 +65,10 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
+    @GetMapping("/name/{nombre}")
+    public Product getByNombre(@PathVariable String nombre) {
+        return productService.getByNombre(nombre);
+    }
     
 
 }

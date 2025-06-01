@@ -1,14 +1,16 @@
-package com.ejemplo.Products.Service;
+package com.ejemplo.products.service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import com.ejemplo.Products.Dto.ProductDto;
-import com.ejemplo.Products.Entity.Product;
-import com.ejemplo.Products.Repository.ProductRepository;
+import com.ejemplo.products.dto.ProductDto;
+import com.ejemplo.products.entity.Product;
+import com.ejemplo.products.repository.ProductRepository;
 
 @Service
 public class ProductService {
@@ -19,11 +21,12 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-     public Product createProduct(ProductDto producto) {
+    public Product createProduct(ProductDto producto) {
         Product product = new Product();
         product.setNombre(producto.getNombre());
         product.setDescripcion(producto.getDescripcion());
         product.setValor(producto.getValor());
+        product.setStock(producto.getStock());
         return productRepository.save(product);
     }
 
@@ -39,7 +42,7 @@ public class ProductService {
             product.setNombre(productDto.getNombre());
             product.setDescripcion(productDto.getDescripcion());
             product.setValor(productDto.getValor());
-
+            product.setStock(productDto.getStock());
             return productRepository.save(product);
         } else {
             throw new RuntimeException("Producto con ID " + id + " no encontrado.");
@@ -63,7 +66,13 @@ public class ProductService {
         return productos.stream().map(product -> new ProductDto(
                 product.getNombre(),
                 product.getDescripcion(),
-                product.getValor()
+                product.getValor(),
+                product.getStock()
         )).collect(Collectors.toList());
     }
+
+    public Product getByNombre( String nombre){
+        return productRepository.findByNombre(nombre);
+    }
+    
 }
