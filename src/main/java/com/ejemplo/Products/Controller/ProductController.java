@@ -69,6 +69,19 @@ public class ProductController {
     public Product getByNombre(@PathVariable String nombre) {
         return productService.getByNombre(nombre);
     }
+
+    @PutMapping("/stock/{id}")
+    public ResponseEntity<Void> updateStock(@PathVariable Long id, @RequestParam int cantidad) {
+        Product product = productService.getProductById(id);
+        
+        if (product.getStock() < cantidad) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        product.setStock(product.getStock() - cantidad);
+        productService.save(product);
+        return ResponseEntity.ok().build();
+    }
     
 
 }

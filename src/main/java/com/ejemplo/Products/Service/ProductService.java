@@ -74,5 +74,9 @@ public class ProductService {
     public Product getByNombre( String nombre){
         return productRepository.findByNombre(nombre);
     }
+
+    public Product save(Product product) {
+    return productRepository.save(product);
+}
     
 }
